@@ -3,7 +3,6 @@ import api from "../api";
 
 const Users = () => {
   const [users, setUsers] = useState(api.users.fetchAll());
-  console.log(api.users.fetchAll());
 
   const getBadgeClasses = (quality) => {
     let classes = "badge m-1 bg-";
@@ -30,12 +29,12 @@ const Users = () => {
       users.length !== 0 &&
       users.map((user) => {
         return (
-          <tr>
+          <tr key={user._id}>
             <td>{user.name}</td>
             <td>
               {user.qualities.map((quality) => {
                 return (
-                  <span className={getBadgeClasses(quality)}>
+                  <span key={quality._id} className={getBadgeClasses(quality)}>
                     {quality.name}
                   </span>
                 );
@@ -66,7 +65,7 @@ const Users = () => {
             {renderPhrase(users.length)}
           </span>
         </h2>
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th scope="col">Имя</th>
